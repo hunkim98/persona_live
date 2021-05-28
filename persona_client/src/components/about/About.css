@@ -1,0 +1,141 @@
+.about_container {
+  display: flex;
+  padding: 0 3vw 0 3vw;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+}
+
+.about_logo_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: space-between;
+}
+
+.about_logo_container .signature {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.about_logo_container .signature img {
+  width: 100%;
+  height: auto;
+}
+
+.about_pattern {
+  height: 210px;
+  width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.about_pattern:last-of-type {
+  flex-direction: row-reverse;
+}
+
+.about_pattern .desktop_pattern {
+  width: 100%;
+  height: auto;
+}
+
+.about_pattern .mobile_pattern1 {
+  height: 210px;
+  width: auto;
+}
+
+.about_pattern .mobile_pattern2 {
+  height: 100%;
+  width: auto;
+}
+
+/*
+*
+* persona_information
+* 
+*/
+
+.about_information {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 330px;
+  font-family: "Noto Sans CJK KR", sans-serif;
+}
+
+.about_information .title {
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.about_information .quote {
+  font-size: 23px;
+  font-weight: 600;
+  display: inline;
+  background-color: #fff100;
+  line-height: 43px;
+}
+
+.about_information .information {
+  font-size: 23px;
+  line-height: 43px;
+}
+
+.about_information p {
+  margin-top: 40px;
+}
+
+.creator_info {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 330px;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+}
+
+.creator_info .name {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+}
+
+.creator_info .email {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.creator_info .email:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .about_logo_container .signature {
+    min-width: 130px;
+  }
+  .about_information .title {
+    font-size: 23px;
+  }
+  .about_information .quote {
+    font-size: 15px;
+    line-height: 30px;
+  }
+  .about_information .information {
+    font-size: 15px;
+    line-height: 30px;
+  }
+  .creator_info {
+    font-size: 15px;
+  }
+}

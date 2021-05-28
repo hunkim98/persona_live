@@ -1,0 +1,32 @@
+.mask_collection_container {
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+.mask_collection {
+  width: 100%;
+  min-width: 340px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mask_collection .mask_container {
+  width: 15%;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.mask_collection .mask_img {
+  width: 100%;
+  height: auto;
+}
+
+.mask_collection .mask_index {
+  width: 25%;
+  height: auto;
+  opacity: 0.5;
+}

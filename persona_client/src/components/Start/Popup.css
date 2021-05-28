@@ -1,0 +1,52 @@
+.popup_container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+}
+
+.popup_container .content {
+  font-family: "Noto Sans CJK KR", sans-serif;
+  font-size: 13px;
+  width: 100%;
+  max-width: 220px;
+  min-width: 220px;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup_container p {
+  margin: 9px 0px;
+}
+
+.popup_container p:first-of-type {
+  display: flex;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.popup_container .title {
+  background-color: #fff100;
+}
+
+.confirm_notice {
+  font-size: 13px;
+  width: 60px;
+  height: 25px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  align-self: center;
+  font-family: "Noto Sans CJK KR", sans-serif;
+  font-weight: 500;
+}

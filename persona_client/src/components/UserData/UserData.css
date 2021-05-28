@@ -1,0 +1,21 @@
+.userData {
+  display: flex;
+}
+
+.userData .name {
+  width: 100px;
+  overflow: hidden;
+}
+
+.userData .personality {
+  width: 80px;
+}
+
+.total_users {
+  display: flex;
+  font-size: 40px;
+}
+
+.total_users .title {
+  margin-right: 15px;
+}

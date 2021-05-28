@@ -1,0 +1,25 @@
+.button_container {
+  margin-top: 40px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back_button {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: auto;
+  border-radius: 30px;
+  font-family: "Noto Sans CJK KR", sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+.back_button:hover {
+  width: 52px;
+}

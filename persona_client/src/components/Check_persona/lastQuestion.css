@@ -1,0 +1,39 @@
+.last_options_container {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 500px;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+}
+
+.last_options {
+  font-family: "Noto Sans CJK KR", sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .last_options:hover {
+    background: #000000;
+    color: #fff;
+  }
+}
+@media (hover: none) and (pointer: coarse) {
+  .last_options:active {
+    background: #000000;
+    color: #fff;
+  }
+}
