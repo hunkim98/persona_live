@@ -57,7 +57,6 @@ function Infographic({ changeColor }) {
   }, []);
 
   useEffect(() => {
-    console.log(windowSize);
     if (windowSize[0] < 1300) {
       setSize(0.8);
     } else {
@@ -70,8 +69,8 @@ function Infographic({ changeColor }) {
     window.scrollTo(0, 0);
 
     axios({
-      method: "GET",
-      url: "https://personapersonality.com/gatherData", //change this later
+      method: "POST",
+      url: "/gatherData", //change this later
     }).then((res) => {
       setTotalNumber(res.data.length);
       for (let i = 0; i < res.data.length; i++) {

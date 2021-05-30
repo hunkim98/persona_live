@@ -4,16 +4,23 @@ var request = require("request");
 const app = express();
 const port = process.env.PORT || 5000;
 const Datastore = require("nedb");
-const fetch = require("node-fetch");
+var path = require("path");
 
 const database = new Datastore("database.db");
 database.loadDatabase();
 app.use(express.json({ limit: "1mb" }));
 
-app.get("/gatherData", (req, res) => {
+app.use(express.static(path.join(__dirname, "../persona_client/build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../persona_client/build", "index.html"));
+});
+
+app.post("/gatherData", (req, res) => {
   database.find({}, (err, docs) => {
+    console.log("sending whole Data");
     res.header("Access-Control-Allow-Origin", "*");
-    res.send(docs);
+    res.json(docs);
   });
 });
 
