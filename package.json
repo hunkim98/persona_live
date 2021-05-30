@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd persona_server && npm start",
-    "heroku-prebuild": "(cd persona_server && npm install) && (cd ../persona_client && npm install)",
+    "heroku-prebuild": "(cd persona_server && npm install) && (cd persona_client && npm install)",
     "heroku-postbuild": "cd persona_client && npm run build"
   },
   "repository": {
