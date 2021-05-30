@@ -10,10 +10,10 @@ const database = new Datastore("database.db");
 database.loadDatabase();
 app.use(express.json({ limit: "1mb" }));
 
-app.use(express.static(path.join(__dirname, "../persona_client/build")));
+app.use(express.static(path.join(__dirname, "pasted_build")));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../persona_client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "pasted_build", "index.html"));
 });
 
 app.post("/gatherData", (req, res) => {
