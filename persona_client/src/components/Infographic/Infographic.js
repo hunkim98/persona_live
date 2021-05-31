@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import "./Infographic.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { mask_fit, mask_fit_cover } from "./mask_fit";
 import Treemap from "../treemap/treemap";
+import { show_mask } from "../Result/mask_result";
+import BackButton from "../backbutton/BackButton";
 const mask_names = [
   "삐꺽거리는 로봇",
   "귀여운 날다람쥐",
@@ -28,6 +30,7 @@ const colors = [
 ];
 function Infographic({ changeColor }) {
   let { id } = useParams();
+  let history = useHistory();
   const [totalNumber, setTotalNumber] = useState(0);
   const [personality, setPersonality] = useState(0);
   const [name, setName] = useState("");
@@ -40,9 +43,7 @@ function Infographic({ changeColor }) {
   const [personalityArray, setPersonalityArray] = useState([]);
   const [size, setSize] = useState(1);
   let complete_analysis = {};
-  let chosenData;
   let json_data = { children: [] };
-  let personality_array = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   let chosen_data_analysis = { A: 0, CPL: 0, W: 0, P: 0, CPT: 0, R: 0 };
   const [windowSize, setWindowSize] = useState([0, 0]);
 
@@ -63,48 +64,59 @@ function Infographic({ changeColor }) {
       setSize(1);
     }
   }, [windowSize]);
+  useEffect(() => {
+    axios({
+      method: "POST",
+      url: "/infographic",
+    }).then((res) => {
+      let infographic_array = res.data.reduce(function (a, b) {
+        return a + b;
+      }, 0);
+      setTotalNumber(infographic_array);
+      setPersonalityArray(res.data);
+      for (let j = 0; j < 9; j++) {
+        json_data.children[j] = {
+          name: mask_names[j],
+          value: res.data[j],
+          id: j + 1,
+        };
+      }
+      setJsonData(json_data);
+    });
+  }, []);
 
   useEffect(() => {
     changeColor("#76729F");
     window.scrollTo(0, 0);
-
     axios({
       method: "POST",
-      url: "/gatherData", //change this later
-    }).then((res) => {
-      setTotalNumber(res.data.length);
-      for (let i = 0; i < res.data.length; i++) {
-        personality_array[res.data[i].personality - 1]++;
-        //this is for gathering all data of res.data
-        if (res.data[i]._id == id) {
-          chosenData = res.data[i];
-          setName(res.data[i].name);
-          setPersonality(res.data[i].personality);
+      url: "/shareData",
+      data: {
+        user_id: id,
+      },
+    })
+      .then((res) => {
+        if (res.data.status !== "false") {
+          setName(res.data.name);
+          setPersonality(res.data.personality);
           setShowMap(true);
+        } else {
+          console.log(res.data.status);
         }
-      }
-      for (let key in chosen_data_analysis) {
-        //we use for.. in.. to loop json object
-        for (let i = 0; i < chosenData.choice.length; i++) {
-          if (key === chosenData.choice[i].choice) {
-            chosen_data_analysis[key]++;
+        for (let key in chosen_data_analysis) {
+          for (let i = 0; i < res.data.choice.length; i++) {
+            if (key === res.data.choice[i].choice) {
+              chosen_data_analysis[key]++;
+            }
           }
         }
-      }
-
-      for (let j = 0; j < 9; j++) {
-        json_data.children[j] = {
-          name: mask_names[j],
-          value: personality_array[j],
-          id: j + 1,
-        };
-      }
-      setPersonalityArray(personality_array);
-      setAnalysis(chosen_data_analysis);
-      setJsonData(json_data);
-      console.log(json_data);
-    });
+        setAnalysis(chosen_data_analysis);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
   useEffect(() => {
     let min_hornevian = 9; //total of 9 hornevian questions
     let min_harmonic = 5; //total of 5 harmonic questions
@@ -200,24 +212,20 @@ function Infographic({ changeColor }) {
         }
       } else {
         if (key.slice(1, 3) == personality) {
-          console.log(key);
           setMasks((array) => [...array, [personality - 1]]);
           setCoverMasks((array) => [
             ...array,
             1 - complete_analysis[key] / 100,
           ]);
-          console.log(masks);
           setPercentage((array) => [
             ...array,
             complete_analysis[key].toFixed(1) + "%",
           ]);
-          console.log(complete_analysis[key]);
         }
       }
     }
 
     for (let key in complete_analysis) {
-      console.log(key);
       if (
         complete_analysis[key] == maximum_option &&
         key.slice(1, 3) != personality
@@ -249,7 +257,15 @@ function Infographic({ changeColor }) {
                 data={jsonData}
                 personalityArray={personalityArray}
               />
-            ) : null}
+            ) : (
+              <div className="loading_container">
+                <img
+                  className="loading_infographic rotating_mask"
+                  src={show_mask(0)}
+                  alt=""
+                />
+              </div>
+            )}
           </div>
           <div className="mask_analysis">
             <div className="title_container">
@@ -351,6 +367,8 @@ function Infographic({ changeColor }) {
             </div>
           </div>
         </div>
+        <BackButton goToBack={() => history.goBack()} />
+        <div className="button_margin"></div>
       </div>
     </div>
   );

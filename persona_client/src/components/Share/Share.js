@@ -249,9 +249,9 @@ function Share({ changeColor }) {
               <div className="result_basic_info_container">
                 <div className="result_basic_information">
                   {show_basic_info(personality)}
-                  {/* <Link className="details_button" to={"/infographic/" + id}>
+                  <Link className="details_button" to={"/infographic/" + id}>
                     상세분석&gt;
-                  </Link> */}
+                  </Link>
                 </div>
               </div>
               <div className="result_divide">

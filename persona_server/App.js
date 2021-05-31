@@ -1,19 +1,42 @@
 const { response } = require("express");
 const express = require("express");
-var request = require("request");
 const app = express();
 const port = process.env.PORT || 5000;
 const Datastore = require("nedb");
 var path = require("path");
 
 const database = new Datastore("database.db");
+const index_directory = "pasted_build"; //choose between "pasted_build" and "../persona_client/build"
 database.loadDatabase();
 app.use(express.json({ limit: "1mb" }));
 
-app.use(express.static(path.join(__dirname, "pasted_build")));
+app.use(express.static(path.join(__dirname, index_directory)));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "pasted_build", "index.html"));
+  res.sendFile(path.join(__dirname, index_directory, "index.html"));
+});
+
+app.post("/infographic", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  infographic_data = [];
+  async function data_check(i) {
+    database.find({ personality: i }, (err, docs) => {
+      infographic_data.push(docs.length);
+      if (i === 9) {
+        console.log(infographic_data);
+        res.json(infographic_data);
+      }
+      return docs.length;
+    });
+  }
+  async function main() {
+    //node js is javascript non-blocking
+    //you need to use await and async function for creating sequential functions
+    for (i = 1; i < 10; i++) {
+      const a = await data_check(i);
+    }
+  }
+  main();
 });
 
 app.post("/gatherData", (req, res) => {
@@ -77,6 +100,7 @@ app.post("/shareData", (req, res) => {
         status: "success",
         name: docs.name,
         personality: docs.personality,
+        choice: docs.choice,
       });
     } else {
       res.json({

@@ -18,7 +18,6 @@ function Treemap({ personality, data, personalityArray }) {
     height = 700 - margin.top - margin.bottom;
 
   function renderTreemap() {
-    console.log(data);
     const svg = d3
       .select(svgRef.current)
       .attr("preserveAspectRatio", "xMinYMin meet")
