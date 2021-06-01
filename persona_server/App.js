@@ -20,7 +20,7 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
 const database = new Datastore("database.db");
-const index_directory = "pasted_build"; //choose between "pasted_build" and "../persona_client/build"
+const index_directory = "pasted"; //choose between "pasted_build" and "../persona_client/build"
 database.loadDatabase();
 app.use(express.json({ limit: "1mb" }));
 
