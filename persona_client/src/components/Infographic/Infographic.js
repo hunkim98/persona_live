@@ -67,7 +67,7 @@ function Infographic({ changeColor }) {
   useEffect(() => {
     axios({
       method: "POST",
-      url: "/infographic",
+      url: "/infographic_data",
     }).then((res) => {
       let infographic_array = res.data.reduce(function (a, b) {
         return a + b;

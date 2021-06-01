@@ -5,6 +5,20 @@ const port = process.env.PORT || 5000;
 const Datastore = require("nedb");
 var path = require("path");
 
+const uri = process.env.MONGODB_URI;
+const mongoose = require("mongoose");
+mongoose
+  .connect(
+    "mongodb+srv://hunkim98:hunkim98@cluster0.xzyh7.mongodb.net/firstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => console.log("MongoDB connected..."))
+  .catch((error) => console.log(error));
 const database = new Datastore("database.db");
 const index_directory = "pasted_build"; //choose between "pasted_build" and "../persona_client/build"
 database.loadDatabase();
@@ -16,7 +30,7 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, index_directory, "index.html"));
 });
 
-app.post("/infographic", (req, res) => {
+app.post("/infographic_data", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   infographic_data = [];
   async function data_check(i) {
@@ -29,14 +43,14 @@ app.post("/infographic", (req, res) => {
       return docs.length;
     });
   }
-  async function main() {
+  async function data_sequential() {
     //node js is javascript non-blocking
     //you need to use await and async function for creating sequential functions
     for (i = 1; i < 10; i++) {
       const a = await data_check(i);
     }
   }
-  main();
+  data_sequential();
 });
 
 app.post("/gatherData", (req, res) => {
