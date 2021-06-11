@@ -1,7 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Allow: /$
-Allow: /about/$
-Allow: /masks/$
-Disallow: /
-Sitemap: https://personapersonality.com/sitemap.xml
+Allow: /
+Sitemap: http://personapersonality.com/sitemap.xml

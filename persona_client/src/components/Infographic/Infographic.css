@@ -81,6 +81,7 @@
   align-items: center;
 }
 .mask_option {
+  height: 300px;
   position: relative;
   min-width: 45%;
   display: flex;
@@ -90,6 +91,7 @@
 }
 
 .percentage {
+  height: 0;
   margin-top: 10px;
   display: flex;
   width: 45%;
@@ -242,6 +244,7 @@ image {
   }
   .mask_option {
     height: 220px;
+    width: 220px;
   }
   .option_info {
     display: flex;
@@ -252,5 +255,36 @@ image {
     width: 100%;
     min-width: 0px;
     max-width: 700px;
+  }
+  .mask_percentage_explanation .mask_name {
+    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .mask_option {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+  }
+  .mask_percentage_explanation {
+    font-size: 17px;
+    line-height: 40px;
+  }
+  .mask_percentage_explanation .percentage_number {
+    font-size: 20px;
+  }
+  .mask_percentage_explanation .mask_name {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .mask_option {
+    width: 135px;
+    height: 170px;
+    display: flex;
+    justify-content: center;
   }
 }

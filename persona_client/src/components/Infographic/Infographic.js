@@ -58,8 +58,12 @@ function Infographic({ changeColor }) {
   }, []);
 
   useEffect(() => {
-    if (windowSize[0] < 1300) {
+    if (windowSize[0] < 1300 && windowSize[0] > 500) {
       setSize(0.8);
+    } else if (windowSize[0] < 500 && windowSize[0] > 400) {
+      setSize(0.6);
+    } else if (windowSize[0] < 400) {
+      setSize(0.5);
     } else {
       setSize(1);
     }
@@ -300,7 +304,6 @@ function Infographic({ changeColor }) {
                       </div>
                     )}
                   </div>
-                  <div className="percentage">{percentage[0]}</div>
                 </div>
                 {masks.length > 1 ? (
                   <div className="option_info additional">
@@ -332,7 +335,6 @@ function Infographic({ changeColor }) {
                         </div>
                       )}
                     </div>
-                    <div className="percentage">{percentage[1]}</div>
                   </div>
                 ) : null}
               </div>
