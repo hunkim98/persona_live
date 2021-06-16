@@ -214,6 +214,9 @@ image {
     margin-left: 0;
     padding-bottom: 20px;
   }
+  .mask_analysis {
+    height: 600px;
+  }
   .mask_percentage_explanation {
     margin-top: 20px;
     font-size: 20px;
