@@ -86,6 +86,7 @@ function Infographic({ changeColor }) {
         };
       }
       setJsonData(json_data);
+      setShowMap(true);
     });
   }, []);
 
@@ -103,7 +104,6 @@ function Infographic({ changeColor }) {
         if (res.data.status !== "false") {
           setName(res.data.name);
           setPersonality(res.data.personality);
-          setShowMap(true);
         } else {
           console.log(res.data.status);
         }
