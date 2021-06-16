@@ -255,7 +255,7 @@ function Infographic({ changeColor }) {
                 상대방의 가면은 흔할까?({totalNumber}명 기준)
               </div>
             </div>
-            {showMap ? (
+            {showMap && personality !== 0 ? (
               <Treemap
                 personality={personality}
                 data={jsonData}
