@@ -19,9 +19,44 @@ mongoose
   )
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
-const database = new Datastore("database.db");
 const index_directory = "pasted"; //choose between "pasted_build" and "../persona_client/build"
-database.loadDatabase();
+
+const personaSchema = new mongoose.Schema(
+  {
+    _id: String,
+    name: String,
+    personality: Number,
+    choice: Array,
+    timestamp: Date,
+  },
+  { collection: "collection" }
+);
+
+const updatedSchema = new mongoose.Schema(
+  {
+    _id: mongoose.Schema.Types.ObjectId,
+    name: String,
+    personality: Number,
+    choice: Array,
+    timestamp: Date,
+  },
+  { collection: "collection" } //adds data to the same collection but saved with objectId
+);
+
+const readSchema = new mongoose.Schema(
+  {
+    name: String,
+    personality: Number,
+    choice: Array,
+    timestamp: Date,
+  },
+  { collection: "collection" } //adds data to the same collection but saved with objectId
+);
+
+const personaData = mongoose.model("persona", personaSchema);
+const updatedData = mongoose.model("persona_updated", updatedSchema);
+const readData = mongoose.model("persona_read", readSchema);
+
 app.use(express.json({ limit: "1mb" }));
 
 app.use(express.static(path.join(__dirname, index_directory)));
@@ -33,16 +68,21 @@ app.get("/*", (req, res) => {
 app.post("/infographic_data", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   infographic_data = [];
+  let counter = 0;
   async function data_check(i) {
-    database.find({ personality: i }, (err, docs) => {
-      infographic_data.push(docs.length);
-      if (i === 9) {
+    readData.find({ personality: i }).count(function (err, count) {
+      infographic_data[i - 1] = count;
+      console.log("Number of " + i + " docs: " + count);
+      counter = counter + 1;
+      if (counter === 9) {
+        //added all data
+        console.log("yes!");
         console.log(infographic_data);
         res.json(infographic_data);
       }
-      return docs.length;
     });
   }
+
   async function data_sequential() {
     //node js is javascript non-blocking
     //you need to use await and async function for creating sequential functions
@@ -54,7 +94,7 @@ app.post("/infographic_data", (req, res) => {
 });
 
 app.post("/gatherData", (req, res) => {
-  database.find({}, (err, docs) => {
+  readData.find({}, (err, docs) => {
     console.log("sending whole Data");
     res.header("Access-Control-Allow-Origin", "*");
     res.json(docs);
@@ -86,25 +126,24 @@ app.post("/sendData", (req, res) => {
   console.log(req.body);
   const timestamp = Date.now();
   req.body.timestamp = timestamp;
-  database.insert(req.body);
-  database.findOne(req.body, (err, docs) => {
-    if (err) {
-      response.end();
-      return;
-    }
-    console.log({ id: docs._id });
-    res.json({
-      status: "success",
-      id: docs._id,
-      name: req.body.name,
-    });
+  req.body._id = new mongoose.Types.ObjectId();
+  const persona_add = new updatedData(req.body);
+  persona_add.save().catch((err) => {
+    console.log("Error : " + err);
+  });
+  res.json({
+    status: "success",
+    id: req.body._id,
+    name: req.body.name,
   });
 });
+
+// _id: req.body.user_id
 
 app.post("/shareData", (req, res) => {
   console.log("user requests data");
   console.log(req.body.user_id);
-  database.findOne({ _id: req.body.user_id }, (err, docs) => {
+  personaData.findOne({ _id: req.body.user_id }, (err, docs) => {
     if (err) {
       response.end();
       return;
@@ -117,8 +156,24 @@ app.post("/shareData", (req, res) => {
         choice: docs.choice,
       });
     } else {
-      res.json({
-        status: "false",
+      //search for ObjectId
+      updatedData.findOne({ _id: req.body.user_id }, (err, other) => {
+        if (err) {
+          response.end();
+          return;
+        }
+        if (other !== null) {
+          res.json({
+            status: "success",
+            name: other.name,
+            personality: other.personality,
+            choice: other.choice,
+          });
+        } else {
+          res.json({
+            status: "false",
+          });
+        }
       });
     }
   });
