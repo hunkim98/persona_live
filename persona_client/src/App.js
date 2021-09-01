@@ -14,7 +14,6 @@ import Masks from "./components/masks/Masks";
 import Explanation from "./components/masks/Explanation";
 import Infographic from "./components/Infographic/Infographic";
 import Treemap from "./components/treemap/treemap";
-import AdfitWebComponent from "react-adfit-web-component";
 
 function App() {
   const [startBool, setStartBool] = useState([false, false]);
