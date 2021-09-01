@@ -140,6 +140,7 @@ app.post("/sendData", (req, res) => {
 // _id: req.body.user_id
 app.post("/count_total", (req, res) => {
   readData.find({}).countDocuments(function (err, count) {
+    res.header("Access-Control-Allow-Origin", "*");
     res.json(count);
   });
 });
