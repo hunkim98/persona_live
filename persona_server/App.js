@@ -18,7 +18,7 @@ mongoose
   )
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
-const index_directory = "../persona_client/build"; //choose between "pasted" and "../persona_client/build"
+const index_directory = "pasted"; //choose between "pasted" and "../persona_client/build"
 
 const personaSchema = new mongoose.Schema(
   {
