@@ -55,6 +55,21 @@ function Result({ changeColor }) {
     document
       .querySelector('meta[property="og:url"]')
       .setAttribute("content", baseURL + "share/" + id);
+
+    let ins = document.createElement("ins");
+    let scr = document.createElement("script");
+
+    ins.className = "kakao_ad_area";
+    ins.style = "display:none;";
+    scr.async = "true";
+    scr.type = "text/javascript";
+    scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+    ins.setAttribute("data-ad-width", "320");
+    ins.setAttribute("data-ad-height", "100");
+    ins.setAttribute("data-ad-unit", "DAN-M9jUcT4JoGH6QGVE");
+
+    document.querySelector(".adfit3").appendChild(ins);
+    document.querySelector(".adfit3").appendChild(scr);
   }, []);
 
   const { ref, isComponentVisible, setIsComponentVisible } = HideShow(false);
@@ -292,6 +307,15 @@ function Result({ changeColor }) {
                 <Link className="details_button" to={"/infographic/" + id}>
                   상세분석&gt;
                 </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: 20,
+                    justifyContent: "center",
+                  }}
+                >
+                  <div className="adfit3"></div>
+                </div>
               </div>
               <div className="result_divide">
                 <div className="line"></div>

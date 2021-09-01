@@ -2,7 +2,6 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-const Datastore = require("nedb");
 var path = require("path");
 
 const uri = process.env.MONGODB_URI;
@@ -19,7 +18,7 @@ mongoose
   )
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
-const index_directory = "pasted"; //choose between "pasted_build" and "../persona_client/build"
+const index_directory = "../persona_client/build"; //choose between "pasted" and "../persona_client/build"
 
 const personaSchema = new mongoose.Schema(
   {
@@ -70,7 +69,7 @@ app.post("/infographic_data", (req, res) => {
   infographic_data = [];
   let counter = 0;
   async function data_check(i) {
-    readData.find({ personality: i }).count(function (err, count) {
+    readData.find({ personality: i }).countDocuments(function (err, count) {
       infographic_data[i - 1] = count;
       console.log("Number of " + i + " docs: " + count);
       counter = counter + 1;
@@ -139,6 +138,11 @@ app.post("/sendData", (req, res) => {
 });
 
 // _id: req.body.user_id
+app.post("/count_total", (req, res) => {
+  readData.find({}).countDocuments(function (err, count) {
+    res.json(count);
+  });
+});
 
 app.post("/shareData", (req, res) => {
   console.log("user requests data");

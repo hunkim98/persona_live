@@ -43,6 +43,21 @@ function Share({ changeColor }) {
       });
     changeColor("#76729F");
     window.scrollTo(0, 0);
+
+    let ins = document.createElement("ins");
+    let scr = document.createElement("script");
+
+    ins.className = "kakao_ad_area";
+    ins.style = "display:none;";
+    scr.async = "true";
+    scr.type = "text/javascript";
+    scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+    ins.setAttribute("data-ad-width", "320");
+    ins.setAttribute("data-ad-height", "100");
+    ins.setAttribute("data-ad-unit", "DAN-M9jUcT4JoGH6QGVE");
+
+    document.querySelector(".adfit3").appendChild(ins);
+    document.querySelector(".adfit3").appendChild(scr);
   }, []);
 
   return (
@@ -252,6 +267,15 @@ function Share({ changeColor }) {
                   <Link className="details_button" to={"/infographic/" + id}>
                     상세분석&gt;
                   </Link>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: 20,
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="adfit3"></div>
+                  </div>
                 </div>
               </div>
               <div className="result_divide">

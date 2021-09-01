@@ -14,6 +14,7 @@ import Masks from "./components/masks/Masks";
 import Explanation from "./components/masks/Explanation";
 import Infographic from "./components/Infographic/Infographic";
 import Treemap from "./components/treemap/treemap";
+import AdfitWebComponent from "react-adfit-web-component";
 
 function App() {
   const [startBool, setStartBool] = useState([false, false]);
@@ -32,6 +33,20 @@ function App() {
       ReactGA.pageview(path);
     }
     //to report page view
+    let ins = document.createElement("ins");
+    let scr = document.createElement("script");
+
+    ins.className = "kakao_ad_area";
+    ins.style = "display:none;";
+    scr.async = "true";
+    scr.type = "text/javascript";
+    scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+    ins.setAttribute("data-ad-width", "320");
+    ins.setAttribute("data-ad-height", "100");
+    ins.setAttribute("data-ad-unit", "DAN-coqLHA66wpwf9Pob");
+
+    document.querySelector(".adfit").appendChild(ins);
+    document.querySelector(".adfit").appendChild(scr);
   }, []);
 
   return (
@@ -105,6 +120,16 @@ function App() {
           )}
         />
       </Switch>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <div class="adfit"></div>
+      </div>
     </div>
   );
 }
