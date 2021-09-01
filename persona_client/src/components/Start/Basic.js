@@ -184,11 +184,11 @@ function Basic({
                   <div className="name_comment">
                     * 별칭을 입력하셔도 무관합니다
                   </div>
+                  <div className="developer_account">
+                    Developer Instagram:{" "}
+                    <a href="https://instagram.com/oz.tinman">@oz.tinman</a>
+                  </div>
                 </div>
-              </div>
-              <div className="developer_account">
-                Developer Instagram:{" "}
-                <a href="https://instagram.com/oz.tinman">@oz.tinman</a>
               </div>
             </div>
           )}

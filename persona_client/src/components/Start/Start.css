@@ -17,11 +17,11 @@
 }
 
 .developer_account {
-  position: absolute;
-  bottom: 10px;
+  opacity: 0.5;
+  font-weight: 500;
   display: flex;
-  right: 10px;
-  font-size: 11px;
+  margin-top: 20px;
+  font-size: 12px;
 }
 
 .survey_container {
