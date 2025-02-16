@@ -4,18 +4,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 var path = require("path");
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "";
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://hunkim98:hunkim98@cluster0.xzyh7.mongodb.net/firstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("MongoDB connected..."))
   .catch((error) => console.log(error));
 const index_directory = "pasted"; //choose between "pasted" and "../persona_client/build"

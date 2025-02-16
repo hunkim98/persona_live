@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const app = express();
-const uri =
-  "mongodb+srv://hunkim98:hunkim98@cluster0.xzyh7.mongodb.net/firstDatabase?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {

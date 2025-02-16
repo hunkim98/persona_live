@@ -186,7 +186,9 @@ function Basic({
                   </div>
                   <div className="developer_account">
                     Developer Instagram:{" "}
-                    <a href="https://instagram.com/oz.tinman">@oz.tinman</a>
+                    <a href="https://www.instagram.com/donghuniy/">
+                      @donghuniy
+                    </a>
                   </div>
                 </div>
               </div>

@@ -14,5 +14,7 @@ yarn-error.log*
 .npm/
 yarn.lock
 .eslintcache
+.env.local
+.env
 #.db
 #persona_server/database.db
