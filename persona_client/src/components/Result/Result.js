@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "./Result.css";
 import { show_mask } from "./mask_result";
 import { useMediaQuery } from "react-responsive";
@@ -79,7 +80,7 @@ function Result({ changeColor }) {
   });
 
   const share_kakao_image = () => {
-    let url = "https://personapersonality.vercel.app/static/imgUrl/";
+    let url = baseURL + "/static/imgUrl/";
     url = url + personality + ".png";
     return url;
   };
@@ -115,7 +116,9 @@ function Result({ changeColor }) {
 
   return (
     <>
-      <meta name="image" property="og:image" content={share_kakao_image} />
+      <Helmet>
+        <meta name="image" property="og:image" content={share_kakao_image} />
+      </Helmet>
       <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
         {(props) => (
           <div style={props}>
