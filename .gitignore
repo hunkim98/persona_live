@@ -18,3 +18,4 @@ yarn.lock
 .env
 #.db
 #persona_server/database.db
+.vercel

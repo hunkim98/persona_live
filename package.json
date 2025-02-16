@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "build": "cd persona_client && npm run build",
+        "start": "react-scripts start"
+    }
+}
