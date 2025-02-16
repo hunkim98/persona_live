@@ -15,7 +15,6 @@
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.12",
     "nedb": "^1.8.0",
-    "nedb-to-mongodb": "file:nedb-to-mongodb",
     "node": "^16.1.0",
     "node-fetch": "^2.6.1",
     "promise": "^8.1.0",
