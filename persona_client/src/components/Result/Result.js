@@ -22,7 +22,7 @@ function Result({ changeColor }) {
   //do not use usestate(0). it does not work
   const [name, setName] = useState("");
 
-  const baseURL = "https://personapersonality.com/";
+  const baseURL = "https://personapersonality.vercel.app/";
 
   useEffect(() => {
     changeColor("#76729F");
@@ -78,8 +78,8 @@ function Result({ changeColor }) {
     query: "(max-width:1280px)",
   });
 
-  const share_kakao_url = () => {
-    let url = "https://hunkim98.github.io/persona/imgUrl/";
+  const share_kakao_image = () => {
+    let url = "https://personapersonality.vercel.app/static/imgUrl/";
     url = url + personality + ".png";
     return url;
   };
@@ -91,7 +91,7 @@ function Result({ changeColor }) {
       content: {
         title: "상대방이 나에게 이런 성격의 가면이 있다고 보고 있어요!",
         description: "#성격심리 #에니어그램 #성격가면",
-        imageUrl: share_kakao_url(),
+        imageUrl: share_kakao_image(),
         link: {
           mobileWebUrl: baseURL + "share/" + id,
           webUrl: baseURL + "share/" + id,
@@ -115,6 +115,7 @@ function Result({ changeColor }) {
 
   return (
     <>
+      <meta name="image" property="og:image" content={share_kakao_image} />
       <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
         {(props) => (
           <div style={props}>
